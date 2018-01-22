@@ -20,7 +20,9 @@ public class DescriptiveStatistics {
 	public static void main(String[] args) throws Exception {
 
 		if(args.length<2)
-			throw new IllegalArgumentException("You must provide two arguments.\n  1. a valid sparql-endpoint-url\n  2. an output-file location");
+			throw new IllegalArgumentException("You must provide two arguments.\n"
+					+ "  1. a valid sparql-endpoint-url\n"
+					+ "  2. an output-file location\n");
 		
 		String sparqlEndpoint = args[0];
 		String outputFilePath = args[1];
@@ -28,7 +30,8 @@ public class DescriptiveStatistics {
 		Model statistics = null;
 		
 		Yaml yaml = new Yaml();
-		Map<String, Object> yamlFile = (Map<String, Object>)yaml.load(DescriptiveStatistics.class.getResourceAsStream("/queries.yaml"));
+		Map<String, Object> yamlFile = (Map<String, Object>)yaml.load(
+				DescriptiveStatistics.class.getResourceAsStream("/queries.yaml"));
 		List<Map<String, String>> prefixes = (List<Map<String, String>>)yamlFile.get("prefixes");
 		List<String> queries = (List<String>)yamlFile.get("queries");
 		
@@ -40,10 +43,12 @@ public class DescriptiveStatistics {
 			
 		
 		for(String sparql : queries) {
+			System.out.println("executing ->\n" + sparql + "\n");
 			query.setCommandText(sparql);
 			QueryExecution queryExecution = QueryExecutionFactory.sparqlService(sparqlEndpoint, query.toString());
+			queryExecution.setTimeout(0, 0);
 			Model model = queryExecution.execConstruct();
-			statistics = (statistics==null)?model:ModelFactory.createUnion(statistics, model);
+			statistics = (statistics==null) ? model : ModelFactory.createUnion(statistics, model);
 		}
 		
 		RDFDataMgr.write(new FileOutputStream(new File(outputFilePath)), statistics, RDFFormat.RDFXML_PRETTY);

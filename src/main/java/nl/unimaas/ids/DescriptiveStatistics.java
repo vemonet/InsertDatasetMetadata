@@ -18,8 +18,7 @@ public class DescriptiveStatistics {
 	
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
-		// TODO: print usage if problems come up
-		
+
 		if(args.length<2)
 			throw new IllegalArgumentException("You must provide two arguments.\n  1. a valid sparql-endpoint-url\n  2. an output-file location");
 		

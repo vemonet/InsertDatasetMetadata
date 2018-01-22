@@ -1,0 +1,14 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.w3.org/ns/dqv#">
+  <j.0:QualityMeasurement rdf:about="http://www.w3.org/hcls#numberOfTriples">
+    <j.0:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >440253789</j.0:value>
+    <j.0:isMeasurementOf rdf:resource="http://www.w3.org/ns/dqv#scopeAndDatatypesMetric"/>
+  </j.0:QualityMeasurement>
+  <j.0:QualityMeasurement rdf:about="http://www.w3.org/hcls#numberOfEntities">
+    <j.0:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >50061532</j.0:value>
+    <j.0:isMeasurementOf rdf:resource="http://www.w3.org/ns/dqv#scopeAndDatatypesMetric"/>
+  </j.0:QualityMeasurement>
+</rdf:RDF>

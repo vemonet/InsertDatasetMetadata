@@ -1,0 +1,19 @@
+---
+prefixes:
+  - dqv: http://www.w3.org/ns/dqv#
+  - hcls: http://www.w3.org/hcls#
+queries :
+  # 6.6.1.1 To specify the number of triples in the dataset
+  - |
+    CONSTRUCT {
+    hcls:numberOfTriples a dqv:QualityMeasurement.
+    hcls:numberOfTriples dqv:isMeasurementOf dqv:scopeAndDatatypesMetric.
+    hcls:numberOfTriples dqv:value ?triples
+    } WHERE { SELECT (COUNT(*) AS ?triples) { ?s ?p ?o  } }
+  # 6.6.1.2 To specify the number of unique, typed entities in the dataset
+  - |
+    CONSTRUCT {
+    hcls:numberOfEntities a dqv:QualityMeasurement.
+    hcls:numberOfEntities dqv:isMeasurementOf dqv:scopeAndDatatypesMetric.
+    hcls:numberOfEntities dqv:value ?entities
+    } WHERE { SELECT (COUNT(DISTINCT ?s) AS ?entities) { ?s a [] } }

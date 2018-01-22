@@ -1,3 +1,5 @@
+# About
+This project executes a series of SPARQL construct statements which result in a RDF XML file containing the results of those statements.
 # Docker
 ## Build
 docker build -t dqa_descriptive_stats .

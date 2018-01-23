@@ -1,12 +1,13 @@
 FROM maven:3-jdk-8
 
-WORKDIR /tmp
+WORKDIR /tmp/dqa
 
 COPY . .
 
 RUN mvn clean install && \
     mkdir /app && \
-    cp target/DescriptiveStatistics-1.0.0-jar-with-dependencies.jar /app
+    mv target/DescriptiveStatistics-1.0.0-jar-with-dependencies.jar /app && \
+    rm -rf /tmp/dqa
     
 WORKDIR /app
 

@@ -62,6 +62,7 @@ public class DescriptiveStatistics {
 		File outputFile = new File(outputFilePath);
 		if(outputFile.getParentFile()!=null) outputFile.getParentFile().mkdirs();
 		RDFDataMgr.write(new FileOutputStream(outputFile), statistics, RDFFormat.NQ);
+		logger.info("Succesfully written results to \"" + outputFile.getAbsolutePath() + "\"");
 
 	}
 

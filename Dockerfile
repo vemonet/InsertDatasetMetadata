@@ -1,14 +1,19 @@
 FROM maven:3-jdk-8
 
-WORKDIR /tmp/dqa
+LABEL maintainer "Alexander Malic <alexander.malic@maastrichtuniversity.nl>"
+
+ENV APP_DIR /app
+ENV TMP_DIR /tmp/dqa
+
+WORKDIR $TMP_DIR
 
 COPY . .
 
 RUN mvn clean install && \
-    mkdir /app && \
-    mv target/DescriptiveStatistics-1.0.0-jar-with-dependencies.jar /app && \
-    rm -rf /tmp/dqa
+    mkdir $APP_DIR && \
+    mv target/DescriptiveStatistics-1.0.0-jar-with-dependencies.jar $APP_DIR && \
+    rm -rf $TMP_DIR
     
-WORKDIR /app
+WORKDIR $APP_DIR
 
 ENTRYPOINT ["java","-jar","DescriptiveStatistics-1.0.0-jar-with-dependencies.jar"]

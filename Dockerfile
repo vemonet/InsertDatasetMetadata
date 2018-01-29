@@ -11,9 +11,9 @@ COPY . .
 
 RUN mvn clean install && \
     mkdir $APP_DIR && \
-    mv target/DescriptiveStatistics-1.0.0-jar-with-dependencies.jar $APP_DIR && \
+    mv target/DescriptiveStatistics-1.0.0-jar-with-dependencies.jar $APP_DIR/DescriptiveStatistics.jar && \
     rm -rf $TMP_DIR
     
 WORKDIR $APP_DIR
 
-ENTRYPOINT ["java","-jar","DescriptiveStatistics-1.0.0-jar-with-dependencies.jar"]
+ENTRYPOINT ["java","-jar","DescriptiveStatistics.jar"]

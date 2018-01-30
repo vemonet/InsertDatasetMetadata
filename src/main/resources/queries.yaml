@@ -59,4 +59,4 @@ queries :
     hcls:numberOfGraphs a dqv:QualityMeasurement.
     hcls:numberOfGraphs dqv:isMeasurementOf dqv:scopeAndDatatypesMetric.
     hcls:numberOfGraphs dqv:value ?graphs
-    } WHERE { SELECT (COUNT(DISTINCT ?g ) AS ?graphs) { GRAPH ?g { ?s ?p ?o }} }
+    } WHERE { SELECT (COUNT(DISTINCT ?g ) AS ?graphs) { GRAPH ?g { ?s ?p ?o } } }

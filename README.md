@@ -17,5 +17,8 @@ docker run -it --rm \
 ```
 ### Windows
 ```
-docker run -it --rm -v /c/data/dqa:/data dqa_descriptive_stats "http://dbpedia.org/sparql" "/data/dbpedia-descriptive.nq"
+docker run -it --rm ^
+  -v /c/data/dqa:/data ^
+  dqa_descriptive_stats ^
+  "http://dbpedia.org/sparql" "/data/dbpedia-descriptive.nq"
 ```

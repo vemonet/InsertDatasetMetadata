@@ -5,7 +5,6 @@ prefixes:
   - hcls: http://www.w3.org/hcls#
   - skos: http://www.w3.org/2004/02/skos/core#
   - xsd: http://www.w3.org/2001/XMLSchema#
-  
 queries :
   # 6.6.1.1 To specify the number of triples in the dataset
   - |
@@ -19,7 +18,7 @@ queries :
     dqv:inDimension dqv:Relevancy .
     dqv:Relevancy a dqv:Dimension ;
     skos:prefLabel "Relevancy" ;
-    skos:definition "Relevancy refers to the provision of information which is in accordance with the task at hand and important to the usersí query."@end ;
+    skos:definition "Relevancy refers to the provision of information which is in accordance with the task at hand and important to the users‚Äô query."@end ;
     dqv:inCategory dqv:Contextual .
     dqv:Contextual a dqv:Category.
     } WHERE { SELECT (COUNT(*) AS ?triples) { ?s ?p ?o  } }
@@ -30,12 +29,12 @@ queries :
     dqv:isMeasurementOf dqv:R2metric ;
     hcls:numberOfEntities dqv:value ?entities .
     dqv:R2metric a dqv:Metric ;
-    skos:definition "Number of unique, typed entities in the datasetî@en ;
+    skos:definition "Number of unique, typed entities in the dataset‚Äù@en ;
     dqv:expectedDatatype xsd:double ;
     dqv:inDimension dqv:Relevancy .
     dqv:Relevancy a dqv:Dimension ;
     skos:prefLabel "Relevancy" ;
-    skos:definition "Relevancy refers to the provision of information which is in accordance with the task at hand and important to the usersí query."@en ;
+    skos:definition "Relevancy refers to the provision of information which is in accordance with the task at hand and important to the users‚Äô query."@en ;
     dqv:inCategory dqv:Contextual .
     dqv:Contextual a dqv:Category.
     } WHERE { SELECT (COUNT(DISTINCT ?s) AS ?entities) { ?s a [] } }
@@ -46,7 +45,7 @@ queries :
     dqv:isMeasurementOf dqv:CN1smetric ;
     hcls:numberOfUniqueSubjects dqv:value ?distinctSubjects .
     dqv:CN1smetric a dqv:Metric ;
-    skos:definition "Number of unique subjects in the dataset.î@en ;
+    skos:definition "Number of unique subjects in the dataset.‚Äù@en ;
     dqv:expectedDatatype xsd:double ;
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
@@ -62,7 +61,7 @@ queries :
     dqv:isMeasurementOf dqv:CN1pmetric ;
     hcls:numberOfUniqueProperties dqv:value ?distinctProperties .
     dqv:CN1pmetric a dqv:Metric ;
-    skos:definition "Number of unique properties in the dataset.î@en ;
+    skos:definition "Number of unique properties in the dataset.‚Äù@en ;
     dqv:expectedDatatype xsd:double ;
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
@@ -78,7 +77,7 @@ queries :
     dqv:isMeasurementOf dqv:CN2metric ;
     hcls:numberOfUniqueObjects dqv:value ?distinctObjects .
     dqv:CN2metric a dqv:Metric ;
-    skos:definition "Number of unique objects in the dataset.î@en ;
+    skos:definition "Number of unique objects in the dataset.‚Äù@en ;
     dqv:expectedDatatype xsd:double ;
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
@@ -94,7 +93,7 @@ queries :
     dqv:isMeasurementOf dqv:CN1cmetric ;
     hcls:numberOfUniqueClasses dqv:value ?distinctClasses .
     dqv:CN1cmetric a dqv:Metric ;
-    skos:definition "Number of unique classes in the dataset.î@en ;
+    skos:definition "Number of unique classes in the dataset.‚Äù@en ;
     dqv:expectedDatatype xsd:double ;
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
@@ -110,7 +109,7 @@ queries :
     dqv:isMeasurementOf dqv:CN2lmetric ;
     hcls:numberOfUniqueLiterals dqv:value ?distinctLiterals .
     dqv:CN2l a dqv:Metric ;
-    skos:definition "Number of unique literals in the dataset.î@en ;
+    skos:definition "Number of unique literals in the dataset.‚Äù@en ;
     dqv:expectedDatatype xsd:double ;
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
@@ -126,7 +125,7 @@ queries :
     dqv:isMeasurementOf dqv:CN4metric ;
     hcls:numberOfGraphs dqv:value ?graphs .
     dqv:CN4 a dqv:Metric ;
-    skos:definition "Number of graphs in the dataset.î@en ;
+    skos:definition "Number of graphs in the dataset.‚Äù@en ;
     dqv:expectedDatatype xsd:double ;
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;

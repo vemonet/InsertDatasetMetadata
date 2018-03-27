@@ -18,7 +18,7 @@ queries :
     dqv:inDimension dqv:Relevancy .
     dqv:Relevancy a dqv:Dimension ;
     skos:prefLabel "Relevancy" ;
-    skos:definition "Relevancy refers to the provision of information which is in accordance with the task at hand and important to the users' query."@end ;
+    skos:definition "Relevancy refers to the provision of information which is in accordance with the task at hand and important to the users' query."@en ;
     dqv:inCategory dqv:Contextual .
     dqv:Contextual a dqv:Category.
     } WHERE { SELECT (COUNT(*) AS ?triples) { ?s ?p ?o  } }
@@ -50,7 +50,7 @@ queries :
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
     skos:prefLabel "Conciseness" ;
-    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@end ;
+    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@en ;
     dqv:inCategory dqv:Intrinsic .
     dqv:Intrinsic a dqv:Category.
     } WHERE { SELECT (COUNT(DISTINCT ?s) AS ?distinctSubjects) {  ?s ?p ?o } }
@@ -66,7 +66,7 @@ queries :
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
     skos:prefLabel "Conciseness" ;
-    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@end ;
+    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@en ;
     dqv:inCategory dqv:Intrinsic .
     dqv:Intrinsic a dqv:Category.   
     } WHERE { SELECT (COUNT(DISTINCT ?p) AS ?distinctProperties) { ?s ?p ?o } }
@@ -82,7 +82,7 @@ queries :
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
     skos:prefLabel "Conciseness" ;
-    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@end ;
+    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@en ;
     dqv:inCategory dqv:Intrinsic .
     dqv:Intrinsic a dqv:Category.
     } WHERE { SELECT (COUNT(DISTINCT ?o ) AS ?distinctObjects) {  ?s ?p ?o  FILTER(!isLiteral(?o)) } }
@@ -98,7 +98,7 @@ queries :
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
     skos:prefLabel "Conciseness" ;
-    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@end ;
+    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@en ;
     dqv:inCategory dqv:Intrinsic .
     dqv:Intrinsic a dqv:Category.
     } WHERE { SELECT (COUNT(DISTINCT ?o) AS ?distinctClasses) { ?s a ?o } }
@@ -114,7 +114,7 @@ queries :
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
     skos:prefLabel "Conciseness" ;
-    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@end ;
+    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@en ;
     dqv:inCategory dqv:Intrinsic .
     dqv:Intrinsic a dqv:Category.
     } WHERE { SELECT (COUNT(DISTINCT ?o) AS ?distinctLiterals) {  ?s ?p ?o  filter(isLiteral(?o)) } }
@@ -130,7 +130,7 @@ queries :
     dqv:inDimension dqv:Conciseness .
     dqv:Conciseness a dqv:Dimension ;
     skos:prefLabel "Conciseness" ;
-    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@end ;
+    skos:definition "Conciseness refers to the minimization of redundancy of entities at the schema and the data level. Conciseness is classified into (i) intensional conciseness (schema level) which refers to the case when the data does not contain redundant schema elements (properties and classes) and (ii) extensional conciseness (data level) which refers to the case when the data does not contain redundant objects (instances)."@en ;
     dqv:inCategory dqv:Intrinsic .
     dqv:Intrinsic a dqv:Category.
     } WHERE { SELECT (COUNT(DISTINCT ?g ) AS ?graphs) { GRAPH ?g { ?s ?p ?o } } }

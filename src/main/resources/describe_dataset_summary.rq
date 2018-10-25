@@ -30,64 +30,68 @@ PREFIX d2sdata: <http://data2services/data/>
 
 # Complete example at https://www.w3.org/TR/hcls-dataset/#appendix_1
 
-CONSTRUCT {
+INSERT {
+    GRAPH <http://data2services/metadata/datasets>
+    {
+        ### Summary Level (Complete)
+        ?summaryUri
+            rdf:type dctypes:Dataset;
 
-    ### Summary Level (Complete)
-    ?summaryUri
-        rdf:type dctypes:Dataset;
+            ### General informations
+            dct:title ?title ; # Must
+            dct:description ?description ; # Must
+            dct:publisher ?publisherUri ; # Must (use https://orcid.org/ for researchers)
 
-        ### General informations
-        dct:title ?title ; # Must
-        #dct:alternative "ChEMBLdb"@en ; # May
-        dct:description ?description ; # Must
-        dct:publisher ?publisherUri ; # Must
-        # Use https://orcid.org/ for researchers
+            idot:preferredPrefix ?datasetPrefix ; # May. Should we use this as source ID?
 
-        #foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should
-        #schemaorg:logo <http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif> ; # Should
+            ### Availability/Distributions
+            dcat:accessURL ?accessURL ; # May. Use this to define the graph (A landing page, feed, SPARQL endpoint or other type of resource that gives access to the distribution of the dataset)
+            void:sparqlEndpoint ?sparqlEndpoint; # Should. Only in summary
 
-        #dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # May
-        #dct:rights "The data in ChEMBL is covered by the Creative Commons By Attribution. Under the -BY clause, we request attribution for subsequent use of ChEMBL. For publications using ChEMBL data, the primary current citation is:If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are preserved, and that the release  number of ChEMBL is clearly displayed."@en ; # May
-        
-        #dcat:theme ncit:C48807 ; #chemical May
-        #dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ; # May
-        #dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ; # May
-        #rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ; # May
-        #cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ; # May
-        #dct:hasPart :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ; # May
+            dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # May
+            
 
-        ### Identifiers
-        idot:preferredPrefix ?datasetPrefix ; # May Sould we use this as source ID?
-        #idot:alternatePrefix "chembldb" ; # May
+            #dct:rights "The data in ChEMBL is covered by the Creative Commons By Attribution. Under the -BY clause, we request attribution for subsequent use of ChEMBL. For publications using ChEMBL data, the primary current citation is:If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are preserved, and that the release  number of ChEMBL is clearly displayed."@en ; # May
+            #dct:alternative "ChEMBLdb"@en ; # May
+            #foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should
+            #schemaorg:logo <http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif> ; # Should
+            
+            #dcat:theme ncit:C48807 ; #chemical May
+            #dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ; # May
+            #dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ; # May
+            #rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ; # May
+            #cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ; # May
+            #dct:hasPart :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ; # May
 
-        ### Provenance and Change
-        #dct:accrualPeriodicity freq:quarterly; # Should
-        #pav:hasCurrentVersion ?versionUri ; # May (only using isVersionOf atm)
+            ### Identifiers
+            #idot:alternatePrefix "chembldb" ; # May
 
-        ### Availability/Distributions
-        dcat:accessURL ?accessURL ; # May Use this to define the graph? A landing page, feed, SPARQL endpoint or other type of resource that gives access to the distribution of the dataset
-        void:sparqlEndpoint ?sparqlEndpoint; # Should. Only in summary
-    .
+            ### Provenance and Change
+            #dct:accrualPeriodicity freq:quarterly; # Should
+            #pav:hasCurrentVersion ?versionUri ; # May (only using isVersionOf atm)
+        .
 
-    ?publisherUri a dct:Agent ;
-        foaf:name ?publisherName ;
-        foaf:page ?publisherPage ;
-    .
-
+        ?publisherUri a dct:Agent ;
+            foaf:name ?publisherName ;
+            foaf:page ?publisherPage ;
+        .
+    }
 }
 WHERE 
 {
-    BIND(<http://identifiers.org/drugbank/> AS ?summaryUri) # Careful, ido uses it as void:uriSpace for a dcat:CatalogRecord
-    BIND("DrugBank"@en AS ?title)
-    BIND("The DrugBank database is a unique bioinformatics and cheminformatics resource that combines detailed drug data with comprehensive drug target information."@en AS ?description)
+    BIND(<http://identifiers.org/drugbank/> AS ?summaryUri)  # user input
+    # Careful, ido uses it as void:uriSpace for a dcat:CatalogRecord
+    
+    BIND("DrugBank"@en AS ?title) # user input
+    BIND("The DrugBank database is a unique bioinformatics and cheminformatics resource that combines detailed drug data with comprehensive drug target information."@en AS ?description) # user input
 
-    BIND("drugbank" AS ?datasetPrefix)
+    BIND("drugbank" AS ?datasetPrefix) # user input
 
-    BIND(<http://graphdb.dumontierlab.com/repositories/ncats-red-graph> AS ?sparqlEndpoint)
+    BIND(<http://graphdb.dumontierlab.com/repositories/ncats-red-graph> AS ?sparqlEndpoint) # user input
 
-    BIND(<http://data2services/biolink/drugbank> AS ?accessURL)
+    BIND(iri(concat("http://data2services/graph/biolink/", ?datasetPrefix)) AS ?accessURL) # TODO: generated from prefix
 
-    BIND(<http://data2services/agent/drugbank> AS ?publisherUri)
-    BIND("DrugBank" AS ?publisherName)
-    BIND(<https://www.drugbank.ca/> AS ?publisherPage)
+    BIND("DrugBank" AS ?publisherName) # user input
+    BIND(<https://www.drugbank.ca/> AS ?publisherPage) # user input
+    BIND(iri(concat("http://data2services/agent/", md5(?publisherName))) AS ?publisherUri)
 }

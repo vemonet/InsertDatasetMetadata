@@ -30,9 +30,9 @@ PREFIX d2sdata: <http://data2services/data/>
 
 # Complete example at https://www.w3.org/TR/hcls-dataset/#appendix_1
 
-CONSTRUCT {
-#    GRAPH <http://data2services/metadata/datasets>
-#    {
+INSERT {
+    GRAPH <http://data2services/metadata/datasets>
+    {
 
         ?rdfCreatorUri a dct:Agent ;
             foaf:name ?rdfCreatorName ;
@@ -103,7 +103,7 @@ CONSTRUCT {
             dct:description ?description ;  # Must from sum
             pav:version ?version ; # Should from version
             dct:license ?license ; # Must from sum. But let the possibility to redefine it for a dataset
-            dct:conformsTo <http://www.w3.org/2001/sw/hcls/notes/hcls-dataset/> ; # Should
+            dct:conformsTo ?conformsTo ; # Should
 
             dct:issued ?dateIssued ; # Should
             dct:publisher ?publisherUri ; # Must from sum
@@ -112,7 +112,7 @@ CONSTRUCT {
 
             dct:language ?language ; # Should from version
 
-            dct:format "application/sql" ; # Must
+            dct:format ?sourceFormat ; # Must
             dcat:downloadURL ?sourceDownloadURL ; # Should
 
 
@@ -162,7 +162,7 @@ CONSTRUCT {
             dct:title ?rdfDistributionTitle ; # Must
             dct:description ?rdfDistributionDescription ; # Must from sum
             dct:license ?license ; # Must sum
-            dct:conformsTo <http://www.w3.org/2001/sw/hcls/notes/hcls-dataset/> ; # Should
+            dct:conformsTo ?conformsTo ; # Should
 
             dct:language ?language ; # Should from version
             void:vocabulary ?vocabulary ; # Should
@@ -176,7 +176,7 @@ CONSTRUCT {
             idot:exampleIdentifier ?exampleIdentifier ; # Should.
             void:exampleResource ?exampleResource ; # Should.
 
-            dct:format <http://www.w3.org/ns/formats/Turtle>, "application/gzip", "text/turtle" ; # Must
+            dct:format ?rdfFormat ; # Must
             dcat:accessURL ?accessURL ; # May
             dcat:downloadURL ?rdfDownloadURL ; # Should
             void:dataDump ?rdfDatadump ; # Should
@@ -214,54 +214,58 @@ CONSTRUCT {
             ### Availability/Distributions
             #dcat:landingPage <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17/chembl_17_release_notes.txt> ; # May version
             #void:subset ?linksetUri ; # Should
-   # }      
+    }      
 }
 WHERE 
 { 
-    BIND(<http://identifiers.org/drugbank/> AS ?summaryUri) # user input
-    # Careful, for drugbank ido uses it as void:uriSpace for a dcat:CatalogRecord
-    
-    BIND("1"^^xsd:string AS ?version) # Increment it from the latest version? Or user input
-    BIND(iri(concat(str(?summaryUri), "version/", str(?version))) AS ?versionUri)
-    BIND(iri(concat(str(?summaryUri), "distribution/source/", str(?version))) AS ?distributionSourceUri)
-    BIND(iri(concat(str(?summaryUri), "distribution/rdf/", str(?version))) AS ?distributionRdfUri)
+    GRAPH <http://data2services/metadata/datasets> {
+        BIND(<http://identifiers.org/drugbank/> AS ?summaryUri) # user input
+        # Careful, for drugbank ido uses it as void:uriSpace for a dcat:CatalogRecord
+        
+        BIND("1"^^xsd:string AS ?version) # Increment it from the latest version? Or user input
+        BIND(iri(concat(str(?summaryUri), "version/", str(?version))) AS ?versionUri)
+        BIND(iri(concat(str(?summaryUri), "distribution/source/", str(?version))) AS ?distributionSourceUri)
+        BIND(iri(concat(str(?summaryUri), "distribution/rdf/", str(?version))) AS ?distributionRdfUri)
 
-    ?summaryUri dct:title ?title ;
-        dct:description ?description ;
-        dct:publisher ?publisherUri ;
-        idot:preferredPrefix ?datasetPrefix ;
-        dcat:accessURL ?accessURL ;
-        dct:license ?license .
+        ?summaryUri dct:title ?title ;
+            dct:description ?description ;
+            dct:publisher ?publisherUri ;
+            idot:preferredPrefix ?datasetPrefix ;
+            dcat:accessURL ?accessURL ;
+            dct:license ?license .
 
 
-    BIND(concat("Converted to RDF using data2services framework. ", ?description) AS ?rdfDistributionDescription)
+        BIND(<http://www.w3.org/2001/sw/hcls/notes/hcls-dataset/> AS ?conformsTo) # constant
 
-    BIND("2013-08-29"^^xsd:date AS ?dateIssued) # user input or generated?
+        BIND("2013-08-29"^^xsd:date AS ?dateIssued) # user input or generated?
 
-    BIND(<http://lexvo.org/id/iso639-3/eng> AS ?language) # user input
+        BIND(<http://lexvo.org/id/iso639-3/eng> AS ?language) # user input
 
-    # Version
-    BIND(concat(str(?title), " Version ", str(?version)) AS ?versionTitle) # user input, automate it?
+        # Version
+        BIND(concat(str(?title), " Version ", str(?version)) AS ?versionTitle) # user input, automate it?
 
-    # Source distribution
-    BIND(concat(?versionTitle, " Database Distribution") AS ?sourceDistributionTitle)
-    BIND(<ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/chembl_17_mysql.tar.gz> AS ?sourceDownloadURL) # user input
-    # TODO: format
+        # Source distribution
+        BIND(concat(?versionTitle, " Database Distribution") AS ?sourceDistributionTitle)
+        BIND("application/xml" AS ?sourceFormat)
+        BIND(<https://www.drugbank.ca/releases/5-1-1/downloads/all-full-database> AS ?sourceDownloadURL) # user input
+        # TODO: format
 
-    # RDF distribution
-    BIND(concat(?versionTitle, " RDF Distribution") AS ?rdfDistributionTitle)
-    BIND(<http://bioentity.io/vocab/> AS ?vocabulary) # user input
-    BIND(<ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17/chembl_17_molecule.ttl.gz> AS ?rdfDownloadURL) # user input
-    BIND(<ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17_molecule.ttl.gz> AS ?rdfDatadump) # user input
-    BIND("Institute of Data Science at Maastricht University" AS ?rdfCreatorName) # user input
-    BIND(<https://www.maastrichtuniversity.nl/research/institute-data-science> AS ?rdfCreatorPage) # user input
-    BIND(iri(concat("http://data2services/agent/", md5(?rdfCreatorName))) AS ?rdfCreatorUri)
-    # TODO: formats    
+        # RDF distribution
+        BIND(concat(?versionTitle, " RDF Distribution") AS ?rdfDistributionTitle)
+        BIND(concat("Converted to BioLink RDF using data2services framework. ", ?description) AS ?rdfDistributionDescription)
+        BIND(<http://bioentity.io/vocab/> AS ?vocabulary) # user input
+        BIND(<http://graphdb.dumontierlab.com/graphs> AS ?rdfDownloadURL) # user input
+        BIND(<http://graphdb.dumontierlab.com/graphs> AS ?rdfDatadump) # user input
+        BIND("Institute of Data Science at Maastricht University" AS ?rdfCreatorName) # user input
+        BIND(<https://www.maastrichtuniversity.nl/research/institute-data-science> AS ?rdfCreatorPage) # user input
+        BIND(iri(concat("http://data2services/agent/", md5(?rdfCreatorName))) AS ?rdfCreatorUri)
+        # When multiple values for a predicate
+        VALUES (?rdfFormat) { ( <http://www.w3.org/ns/formats/Turtle> ) ( "application/n-quads" ) ( "application/rdf+xml" ) ( "application/n3" ) ( "application/ld+json" ) ( "text/turtle" ) }
 
-    # TODO: Automate those
-    BIND("DB00003"^^xsd:string AS ?exampleIdentifier) # user input. TODO: automate those.
-    BIND(<http://identifiers.org/drugbank/DB00003> AS ?exampleResource) # user input. TODO: automate those.
+        # TODO: Automate those
+        BIND("DB00003"^^xsd:string AS ?exampleIdentifier) # user input. TODO: automate those.
+        BIND(<http://identifiers.org/drugbank/DB00003> AS ?exampleResource) # user input. TODO: automate those.
 
-    
+    }
 }
 

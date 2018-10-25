@@ -22,7 +22,6 @@ PREFIX void: <http://rdfs.org/ns/void/>
 PREFIX void-ext: <http://ldf.fi/void-ext#>
 
 
-
 PREFIX bl: <http://bioentity.io/vocab/>
 PREFIX dqv: <http://www.w3.org/ns/dqv#>
 PREFIX hcls: <http://www.w3.org/hcls#>
@@ -33,28 +32,23 @@ PREFIX d2sdata: <http://data2services/data/>
 
 CONSTRUCT {
 
-
   ###Summary Level (Complete)
   ?summaryUri
       rdf:type dctypes:Dataset;
-      dct:title "DrugBank"@en ;
-      #dct:alternative "ChEMBLdb"@en ;
-      dct:description "The DrugBank database is a unique bioinformatics and cheminformatics resource that combines detailed drug data with comprehensive drug target information."@en ;
-      dct:publisher ?publisherUri ;
+      dct:title "DrugBank"@en ; # Must
+      #dct:alternative "ChEMBLdb"@en ; # May
+      dct:description "The DrugBank database is a unique bioinformatics and cheminformatics resource that combines detailed drug data with comprehensive drug target information."@en ; # Must
+      dct:publisher ?publisherUri ; # Must
       # foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should
       # schemaorg:logo <http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif> ; # Should
       dct:rights "The data in ChEMBL is covered by the Creative Commons By Attribution. Under the -BY clause, we request attribution for subsequent use of ChEMBL. For publications using ChEMBL data, the primary current citation is:If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are preserved, and that the release  number of ChEMBL is clearly displayed."@en ; # May
-      dcat:theme ncit:C48807 ; #chemical May
-      dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ; # May
-      dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ; # May
-      rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ; # May
-      cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ; # May
-      dct:hasPart :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ; # May
-      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # May
+      #dcat:theme ncit:C48807 ; #chemical May
       #dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ; # May
       #dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ; # May
       #rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ; # May
       #cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ; # May
+      #dct:hasPart :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ; # May
+      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # May
       #Identifiers
       idot:preferredPrefix "drugbank" ; # May
       #idot:alternatePrefix "chembldb" ; # May
@@ -73,31 +67,44 @@ CONSTRUCT {
   ###Version Level (Complete)
   ?versionUri
       rdf:type dctypes:Dataset;
-      dct:title "ChEMBL Version 17"@en ;
-      dct:description "description"@en ;
+      dct:title "ChEMBL Version 17"@en ; # Must
+      #dct:alternative "ChEMBLdb"@en ; # May
+      dct:description "description"@en ; # Must
       dct:created "2013-08"^^xsd:gYearMonth; # Should
       pav:createdOn "2013-08"^^xsd:gYearMonth; # May
       pav:authoredOn "2013-07"^^xsd:gYearMonth; # May
       pav:curatedOn "2013-07"^^xsd:gYearMonth; # May
-      dct:creator :ebi ; # Must
+      dct:creator ?publisherUri ; # Must
       dct:contributor ?contributorUri ; # May
       pav:createdBy <http://orcid.org/0000-0002-8011-0300> ; # May
       pav:authoredBy ?contributorUri ; # May
       pav:curatedBy ?contributorUri ; # May
       dct:issued "2013-08-29"^^xsd:date ; # Should
       dct:publisher ?publisherUri ; # Must
-      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # Must
+      #foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should sum
+      #schemaorg:logo <http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif> ; # Should sum
+      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # Must sum
+      dct:rights "rights"@en ; # May sum
       dct:language <http://lexvo.org/id/iso639-3/eng> ; # Should
-  #Identifiers
-      idot:preferredPrefix "chembl" ; # May
-  #Provenance and Change
+
+      #dcat:theme ncit:C48807 ; #chemical May sum
+      #dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ; # May sum
+      #dct:conformsTo <http://www.w3.org/2001/sw/hcls/notes/hcls-dataset/> ; # May
+      #dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ; # May sum
+      #rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ; # May sum
+      #cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ; # May sum
+      #dct:hasPart :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ; # May sum
+      #Identifiers
+      idot:preferredPrefix "chembl" ; # May sum
+      #idot:alternatePrefix "chembldb" ; # May sum
+      #Provenance and Change
       pav:version "17"^^xsd:string, "17.0" ; # Must
       dct:isVersionOf ?summaryUri ; # Must
       pav:previousVersion :chembl16 ; # Should
       dct:source :pubchem-bioassay-09-01-2014 ; # Should
-  #Availability/Distributions
+      #Availability/Distributions
       dcat:distribution ?distributionDbUri, ?distributionRdfUri ; # Should
-      dcat:accessURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/> ; # May
+      dcat:accessURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/> ; # May sum
       dcat:landingPage <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/chembl_17_release_notes.txt> ; # May
   .
 
@@ -106,9 +113,9 @@ CONSTRUCT {
   ###Distribution (non-RDF) description (Complete)
   ?distributionDbUri
       a dctypes:Dataset, dcat:Distribution ;
-      dct:title "ChEMBL Version 17 Database Distribution"@en ;
-      #dct:alternative "ChEMBLdb17db"@en ;
-      dct:description "description"@en ;
+      dct:title "ChEMBL Version 17 Database Distribution"@en ; # Must
+      #dct:alternative "ChEMBLdb17db"@en ; # May
+      dct:description "description"@en ;  # Must
       dct:created "2013-08"^^xsd:gYearMonth; # Should
       #pav:createdOn "2013-08"^^xsd:gYearMonth; # May
       #pav:authoredOn "2013-07"^^xsd:gYearMonth; # May
@@ -120,38 +127,47 @@ CONSTRUCT {
       #pav:curatedBy ?contributorUri ; # May
       dct:issued "2013-08-29"^^xsd:date ; # Should
       dct:publisher ?publisherUri ; # Must
-      #foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should
-      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # Must
+      #foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should sum
+      #schemaorg:logo <http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif> ; # Should sum
+      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # Must sum
+      dct:rights "rights" ; # May sum
+
       dct:language <http://lexvo.org/id/iso639-3/eng> ; # Should
-      ##Vocabulary does not make sense for a non-RDF dataset
+      #dcat:theme ncit:C48807 ; #chemical May sum
+      #dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ; # May sum
       dct:conformsTo <http://www.w3.org/2001/sw/hcls/notes/hcls-dataset/> ; # Should
+      #dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ; # May sum
+      #rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ; # May sum
+      #cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ; # May sum
+      # Identifiers
+      idot:preferredPrefix "chembl" ; # May sum
+      idot:alternatePrefix "chembldb" ; # May sum
       idot:identifierPattern "CHEMBL\\d+"^^xsd:string ; # May
       ###void:uriRegexPattern does not make sense for a non-RDF resource
       #idot:accessPattern "http://bio2rdf.org/chembl" ; # May
       idot:exampleIdentifier "CHEMBL25"^^xsd:string ; # Should
       ###void:exampleResource does not make sense for a non-RDF resource
-  #Provenance and Change
+      #Provenance and Change
       ###sio:has-data-item-in not used for non-RDF resources
-      pav:version "17"^^xsd:string, "17.0" ; # Should
-      pav:previousVersion :chembl16db ; # Should
-      dct:source :pubchem-bioassay-09-01-2014 ; # Should
-      pav:createdWith <http://example.com/madeUp/editor> ; # Should
-  #Availability/Distributions
+      pav:version "17"^^xsd:string, "17.0" ; # Should version
+      pav:previousVersion :chembl16db ; # Should version (but not same value)
+      dct:source :pubchem-bioassay-09-01-2014 ; # Should version 
+      pav:createdWith <http://example.com/madeUp/editor> ; # Should 
+      #Availability/Distributions
       dct:format "application/sql" ; # Must
-      dcat:accessURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/> ; # May
-      dcat:landingPage <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/chembl_17_release_notes.txt> ; # May
+      dcat:accessURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/> ; # May version
+      dcat:landingPage <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/chembl_17_release_notes.txt> ; # May version
       dcat:downloadURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_17/chembl_17_mysql.tar.gz> ; # Should
       dcat:byteSize "861443887"^^xsd:decimal ; # Should
       ###void:dataDump does not make sense for a non-RDF resource
-  #Statistics
-      ### Current definitions do not make sense for a non-RDF resource
   .
 
   ###RDF Distribution description (Complete)
   ?distributionRdfUri
       a dctypes:Dataset, dcat:Distribution, void:Dataset ;
-      dct:title "ChEMBL Version 17 RDF Distribution"@en ;
-      dct:description "description"@en ;
+      dct:title "ChEMBL Version 17 RDF Distribution"@en ; # Must
+      #dct:alternative "ChEMBLdb"@en ; # May
+      dct:description "description"@en ; # Must
       dct:created "2013-08"^^xsd:gYearMonth; # Should
       #pav:createdOn "2013-08"^^xsd:gYearMonth; # May
       #pav:authoredOn "2013-07"^^xsd:gYearMonth; # May
@@ -163,21 +179,25 @@ CONSTRUCT {
       #pav:curatedBy ?contributorUri ; # May
       dct:issued "2013-08-29"^^xsd:date ; # Should
       dct:publisher ?publisherUri ; # Must
-      #foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should
-      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # Must
+      #foaf:page <http://www.ebi.ac.uk/chembl/> ; # Should sum
+      #schemaorg:logo <http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif> ; # Should sum
+      dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ; # Must sum
+      dct:rights "rights" ; # May sum
       dct:language <http://lexvo.org/id/iso639-3/eng> ; # Should
 
-      void:vocabulary <http://purl.org/dc/terms/>, <http://rdf.ebi.ac.uk/terms/chembl#>, <http://www.w3.org/ns/dcat#> ;
+      void:vocabulary <http://purl.org/dc/terms/>, <http://rdf.ebi.ac.uk/terms/chembl#>, <http://www.w3.org/ns/dcat#> ; # Should
       dct:conformsTo <http://www.w3.org/2001/sw/hcls/notes/hcls-dataset/> ; # Should
       void:subset :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ; # Should
-  #Identifiers
-      idot:preferredPrefix "chembl" ; # May
+      
+      #Identifiers
+      idot:preferredPrefix "chembl" ; # May sum
+      idot:alternatePrefix "chembldb" ; # May sum
       idot:identifierPattern "CHEMBL\\d+"^^xsd:string ; # May
       void:uriRegexPattern "http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL\\d+" ; # May
       idot:accessPattern "http://bio2rdf.org/chembl", 
         "http://identifiers.org/chembl.compound/", 
         "http://linkedchemistry.info/chembl/chemblid", 
-        "http://www.ebi.ac.uk/chembl/compound/inspect/" ; # Use accessPattern for the graph URI? 
+        "http://www.ebi.ac.uk/chembl/compound/inspect/" ; # May Use accessPattern for the graph URI? 
       idot:exampleIdentifier "CHEMBL25"^^xsd:string ; # Should
       void:exampleResource <http://rdf.ebi.ac.uk/resource/chembl/compound/CHEMBL25> ; # Should
   #Provenance and Change
@@ -193,7 +213,7 @@ CONSTRUCT {
       dcat:landingPage <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17/chembl_17_release_notes.txt> ; # May
       dcat:downloadURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17/chembl_17_molecule.ttl.gz> ; # Should
       void:dataDump <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17_molecule.ttl.gz> ; # Should
-      void:subset :chembl17-uniprot-exactMatch-linkset ; # Should
+      void:subset ?linksetUri ; # Should
   #Statistics: Note that numbers are taken from Bio2RDF release 3
       void:triples "409942525"^^xsd:integer ; # Should
       void:entities "50061452"^^xsd:integer ; # Should
@@ -292,7 +312,7 @@ CONSTRUCT {
     a idot:AccessPattern .
 
     
-      :chembl17-uniprot-exactMatch-linkset
+  ?linksetUri
       ###Linkset specific metadata
         a void:Linkset ;
         void:subjectsTarget :chembl-rdf ;
@@ -303,19 +323,18 @@ CONSTRUCT {
         a dctypes:Dataset, dcat:Distribution, void:Dataset ;
         dct:title "ChEMBL Target Component to UniProt Protein Exact Match Linkset"@en ;
         dct:alternative "ChEMBLTargetCmpt2UniProtEMLS"@en ;
-        dct:description """A linkset connecting ChEMBL target components with their corresponding UniProt protein entry where
-  the match is deemed to be exact."""@en ;
+        dct:description "A linkset connecting ChEMBL target components with their corresponding UniProt protein entry where the match is deemed to be exact."@en ;
         dct:created "2013-08"^^xsd:gYearMonth;
         pav:createdOn "2013-08"^^xsd:gYearMonth;
         pav:authoredOn "2013-07"^^xsd:gYearMonth;
         pav:curatedOn "2013-07"^^xsd:gYearMonth;
-        dct:creator :ebi ;
+        dct:creator ?publisherUri ;
         dct:contributor ?contributorUri ;
         pav:createdBy <http://orcid.org/0000-0002-8011-0300> ;
         pav:authoredBy ?contributorUri ;
         pav:curatedBy ?contributorUri ;
         dct:issued "2013-08-29"^^xsd:date ;
-        dct:publisher :ebi ;
+        dct:publisher ?publisherUri ;
         dct:license <http://creativecommons.org/licenses/by-sa/3.0/> ;
         dct:language <http://lexvo.org/id/iso639-3/eng> ;
         dcat:theme ncit:C17021 ;
@@ -326,8 +345,8 @@ CONSTRUCT {
         rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ;
         cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ;
     #Identifiers
-        idot:preferredPrefix "chembl" ;
-        idot:alternatePrefix "chembldb" ;
+        idot:preferredPrefix "chembl" ; # May sum
+        idot:alternatePrefix "chembldb" ; # May sum
         idot:identifierPattern "CHEMBL\\d+"^^xsd:string ;
         void:uriRegexPattern "http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL\\d+" ;
         idot:accessPattern "http://bio2rdf.org/chembl",
@@ -348,7 +367,7 @@ CONSTRUCT {
         dcat:accessURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17/> ;
         dcat:landingPage <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17/chembl_17_release_notes.txt> ;
         dcat:downloadURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17.0_targetcmpt_uniprot_ls.ttl.gz> ;
-        void:dataDump <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17.0_targetcmpt_uniprot_ls.ttl.gz> ;
+        void:dataDump <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/17.0/chembl_17.0_targetcmpt_uniprot_ls.ttl.gz> .
 
 
 

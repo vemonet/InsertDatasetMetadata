@@ -35,7 +35,7 @@ INSERT {
     {
         ### Summary Level (Complete)
         ?summaryUri
-            rdf:type dctypes:Dataset;
+            rdf:type dctypes:Dataset ;
 
             ### General informations
             dct:title ?title ; # Must

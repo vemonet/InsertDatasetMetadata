@@ -1,8 +1,8 @@
 # see https://www.w3.org/TR/hcls-dataset/#s6_6
 ---
-prefixes:
-  - dqv: http://www.w3.org/ns/dqv#
-  - hcls: http://www.w3.org/hcls#
+metadata:
+  - title: http://www.w3.org/ns/dqv#
+  - description: http://www.w3.org/hcls#
   - skos: http://www.w3.org/2004/02/skos/core#
   - xsd: http://www.w3.org/2001/XMLSchema#
 queries :

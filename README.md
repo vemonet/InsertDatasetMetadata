@@ -5,7 +5,25 @@ This project executes eight SPARQL queries defined by the Health Care and the Li
 
 This Docker container is part of the LODQuA pipeline (https://github.com/MaastrichtU-IDS/dqa_pipeline/).
 
+
+
+## Todo
+
+The program takes arguments. All arguments are loaded to a HashMap and this hashmap is used to construct the SPARQL query to add metadata.
+
+2 types of SPARQL query: 
+
+* creating a new dataset
+* adding a new version to a dataset
+
+Some metadata are mandatory (title and description when creating a new dataset for example). Other will be directly retrieved using SPARQL queries (title when new version...)
+
+
+
+
+
 # Docker
+
 ## Build
 ```
 docker build -t dqa_descriptive_stats .

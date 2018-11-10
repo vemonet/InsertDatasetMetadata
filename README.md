@@ -9,6 +9,10 @@ This Docker container is part of the LODQuA pipeline (https://github.com/Maastri
 
 ## Todo
 
+Check prov-o (we want a generic description)
+
+
+
 The program takes arguments. All arguments are loaded to a HashMap and this hashmap is used to construct the SPARQL query to add metadata.
 
 2 types of SPARQL query: 
@@ -17,8 +21,6 @@ The program takes arguments. All arguments are loaded to a HashMap and this hash
 * adding a new version to a dataset
 
 Some metadata are mandatory (title and description when creating a new dataset for example). Other will be directly retrieved using SPARQL queries (title when new version...)
-
-
 
 
 

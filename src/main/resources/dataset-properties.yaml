@@ -1,0 +1,51 @@
+# see https://www.w3.org/TR/hcls-dataset/#s6_6
+---
+prefixes:
+    cito: http://purl.org/spar/cito/
+    dcat: http://www.w3.org/ns/dcat#
+    dctypes: http://purl.org/dc/dcmitype/
+    dct: http://purl.org/dc/terms/
+    foaf: http://xmlns.com/foaf/0.1/
+    freq: http://purl.org/cld/freq/
+    idot: http://identifiers.org/idot/
+    lexvo: http://lexvo.org/ontology#
+    pav: http://purl.org/pav/
+    prov: http://www.w3.org/ns/prov#
+    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    schemaorg: http://schema.org/
+    sd: http://www.w3.org/ns/sparql-service-description#
+    sio: http://semanticscience.org/resource/
+    void: http://rdfs.org/ns/void#
+    void-ext: http://ldf.fi/void-ext#
+    xsd: http://www.w3.org/2001/XMLSchema
+properties:
+    "rdf:type": 
+        description: "Example: dctypes:Dataset"
+        required: MUST
+        levels:
+            - summary
+            - version
+            - distribution # separate rdf and source?
+    "dct:title": 
+        description: "Example: ChEMBL"
+        required: MUST
+        levels:
+            - summary
+            - version
+            - distribution
+    "dct:alternative": 
+        description: "Example: 'ChEMBLdb'@en"
+        required: MUST
+        levels:
+            - summary
+            - version
+            - rdfDistribution
+            - sourceDistribution
+    "dct:description": 
+        description: "Example: ChEMBL is a database of bioactive compounds"
+        required: MUST
+        levels:
+            - summary
+            - version
+            - distribution

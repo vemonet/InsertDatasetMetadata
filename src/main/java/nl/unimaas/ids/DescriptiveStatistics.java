@@ -2,6 +2,7 @@ package nl.unimaas.ids;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,22 @@ public class DescriptiveStatistics {
 	
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
+
+		Yaml yaml = new Yaml();
+		Map<String, Object> yamlPropertiesFile = (Map<String, Object>)yaml.load(
+				DescriptiveStatistics.class.getResourceAsStream("/dataset-properties.yaml"));
 		
+		Map<String, String> prefixes = (Map<String, String>)yamlPropertiesFile.get("prefixes");
+		
+		System.out.println(Arrays.toString(prefixes.entrySet().toArray()));
+
+		Map<String, String> properties = (Map<String, String>)yamlPropertiesFile.get("properties");
+		
+		System.out.println(Arrays.toString(properties.entrySet().toArray()));
+
+		
+		
+		/*
 		if(args.length<2)
 			throw new IllegalArgumentException("You must provide two arguments.\n"
 					+ "  1. a valid sparql-endpoint-url\n"
@@ -32,14 +48,8 @@ public class DescriptiveStatistics {
 		
 		Model statistics = null;
 		
-		
-		Yaml yaml = new Yaml();
-		Map<String, Object> yamlFile = (Map<String, Object>)yaml.load(
-				DescriptiveStatistics.class.getResourceAsStream("/queries.yaml"));
-		
 		ParameterizedSparqlString query = new ParameterizedSparqlString();
 		
-		List<Map<String, String>> prefixes = (List<Map<String, String>>)yamlFile.get("prefixes");
 		for(Map<String, String> prefix : prefixes) {
 			String key = prefix.keySet().iterator().next();
 			query.setNsPrefix(key, prefix.get(key));
@@ -63,6 +73,7 @@ public class DescriptiveStatistics {
 		if(outputFile.getParentFile()!=null) outputFile.getParentFile().mkdirs();
 		RDFDataMgr.write(new FileOutputStream(outputFile), statistics, RDFFormat.NTRIPLES);
 		logger.info("Succesfully written results to \"" + outputFile.getAbsolutePath() + "\"");
+		*/
 
 	}
 

@@ -1,31 +1,21 @@
 package nl.unimaas.ids;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.jena.query.ParameterizedSparqlString;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.riot.RDFFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
-public class DescriptiveStatistics {
-	private static final Logger logger = LoggerFactory.getLogger(DescriptiveStatistics.class.getName());
+public class InsertDatasetMetadata {
+	private static final Logger logger = LoggerFactory.getLogger(InsertDatasetMetadata.class.getName());
 	
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
 		Yaml yaml = new Yaml();
 		Map<String, Object> yamlPropertiesFile = (Map<String, Object>)yaml.load(
-				DescriptiveStatistics.class.getResourceAsStream("/dataset-properties.yaml"));
+				InsertDatasetMetadata.class.getResourceAsStream("/dataset-properties.yaml"));
 		
 		Map<String, String> prefixes = (Map<String, String>)yamlPropertiesFile.get("prefixes");
 		

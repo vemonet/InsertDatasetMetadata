@@ -7,18 +7,15 @@ public class MetadataProperty {
 	private String name;
 
 	private String description;
-	private String range;
-	private String summaryLevel;
-	private String versionLevel;
-	private String rdfDistributionLevel;
-	private String sourceDistributionLevel;
-	/*private MetadataRange range;
+
+	private MetadataRange range;
 	private MetadataRequirement summaryLevel;
 	private MetadataRequirement versionLevel;
 	private MetadataRequirement rdfDistributionLevel;
-	private MetadataRequirement sourceDistributionLevel;*/
+	private MetadataRequirement sourceDistributionLevel;
 
 	
+	// Getter and setter
 	public String getName() {
 		return name;
 	}
@@ -31,35 +28,34 @@ public class MetadataProperty {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getRange() {
+	public MetadataRange getRange() {
 		return range;
 	}
-	public void setRange(String range) {
+	public void setRange(MetadataRange range) {
 		this.range = range;
 	}
-	public String getSummaryLevel() {
+	public MetadataRequirement getSummaryLevel() {
 		return summaryLevel;
 	}
-	public void setSummaryLevel(String summaryLevel) {
+	public void setSummaryLevel(MetadataRequirement summaryLevel) {
 		this.summaryLevel = summaryLevel;
 	}
-	public String getVersionLevel() {
+	public MetadataRequirement getVersionLevel() {
 		return versionLevel;
 	}
-	public void setVersionLevel(String versionLevel) {
+	public void setVersionLevel(MetadataRequirement versionLevel) {
 		this.versionLevel = versionLevel;
 	}
-	public String getRdfDistributionLevel() {
+	public MetadataRequirement getRdfDistributionLevel() {
 		return rdfDistributionLevel;
 	}
-	public void setRdfDistributionLevel(String rdfDistributionLevel) {
+	public void setRdfDistributionLevel(MetadataRequirement rdfDistributionLevel) {
 		this.rdfDistributionLevel = rdfDistributionLevel;
 	}
-	public String getSourceDistributionLevel() {
+	public MetadataRequirement getSourceDistributionLevel() {
 		return sourceDistributionLevel;
 	}
-	public void setSourceDistributionLevel(String sourceDistributionLevel) {
+	public void setSourceDistributionLevel(MetadataRequirement sourceDistributionLevel) {
 		this.sourceDistributionLevel = sourceDistributionLevel;
 	}
-	
 }

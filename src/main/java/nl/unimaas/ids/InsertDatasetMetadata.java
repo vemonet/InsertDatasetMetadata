@@ -12,6 +12,8 @@ import nl.unimaas.ids.metadata.MetadataProperty;
 public class InsertDatasetMetadata {
 	//private static final Logger logger = LoggerFactory.getLogger(InsertDatasetMetadata.class.getName());
 	
+	// TODO: should we use Java X validation (annotation to validate) 
+	
 	public static void main(String[] args) throws Exception {
 
 		Yaml yaml = new Yaml();

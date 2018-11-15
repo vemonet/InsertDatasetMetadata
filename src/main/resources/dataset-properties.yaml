@@ -1,136 +1,101 @@
-# see https://www.w3.org/TR/hcls-dataset/#s6_6
----
-prefixes:
-    cito: http://purl.org/spar/cito/
-    dcat: http://www.w3.org/ns/dcat#
-    dctypes: http://purl.org/dc/dcmitype/
-    dct: http://purl.org/dc/terms/
-    foaf: http://xmlns.com/foaf/0.1/
-    freq: http://purl.org/cld/freq/
-    idot: http://identifiers.org/idot/
-    lexvo: http://lexvo.org/ontology#
-    pav: http://purl.org/pav/
-    prov: http://www.w3.org/ns/prov#
-    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
-    rdfs: http://www.w3.org/2000/01/rdf-schema#
-    schemaorg: http://schema.org/
-    sd: http://www.w3.org/ns/sparql-service-description#
-    sio: http://semanticscience.org/resource/
-    void: http://rdfs.org/ns/void#
-    void-ext: http://ldf.fi/void-ext#
-    xsd: http://www.w3.org/2001/XMLSchema
+# Full example: https://www.w3.org/TR/hcls-dataset/#appendix_1
+# Stats: see https://www.w3.org/TR/hcls-dataset/#s6_6
+#prefixes:
+#    cito: http://purl.org/spar/cito/
+#    dcat: http://www.w3.org/ns/dcat#
+#    dctypes: http://purl.org/dc/dcmitype/
+#    dct: http://purl.org/dc/terms/
+#    foaf: http://xmlns.com/foaf/0.1/
+#    freq: http://purl.org/cld/freq/
+#    idot: http://identifiers.org/idot/
+#    lexvo: http://lexvo.org/ontology#
+#    pav: http://purl.org/pav/
+#    prov: http://www.w3.org/ns/prov#
+#    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+#    rdfs: http://www.w3.org/2000/01/rdf-schema#
+#    schemaorg: http://schema.org/
+#    sd: http://www.w3.org/ns/sparql-service-description#
+#    sio: http://semanticscience.org/resource/
+#    void: http://rdfs.org/ns/void#
+#    void-ext: http://ldf.fi/void-ext#
+#    xsd: http://www.w3.org/2001/XMLSchema
 properties:
-    "rdf:type": 
-        description: "Example: dctypes:Dataset"
-        required: MUST
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution # separate rdf and source?
-    "dct:title": 
-        description: "Example: ChEMBL"
-        required: MUST
-        range: string
-        levels:
-            - summary
-            - version
-            - distribution
-    "dct:alternative": 
-        description: "Example: 'ChEMBLdb'@en"
-        required: MUST
-        range: string
-        levels:
-            - summary
-            - version
-            - rdfDistribution
-            - sourceDistribution
-    "dct:description": 
-        description: "Example: ChEMBL is a database of bioactive compounds"
-        required: MUST
-        range: string
-        levels:
-            - summary
-            - version
-            - distribution
-    "dct:publisher":
-        description: "Must be an URI. Use https://orcid.org/ for researchers. Example:  https://orcid.org/0000-0003-4727-9435 "
-        required: MUST
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution
-    "foaf:page":
-        description: "Must be an URI. Example: http://www.ebi.ac.uk/chembl/"
-        required: SHOULD
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution
-    "schemaorg:logo":
-        description: "Must be an URI. Example: http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif"
-        required: SHOULD
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution
-    "dct:license":
-        description: "Must be an URI. Example: http://creativecommons.org/licenses/by-sa/3.0/"
-        required: MAY
-        range: uri
-        levels:
-            - summary: MAY
-            - version: MUST
-            - distribution: MUST
-    "dct:rights":
-        description: "Must be an URI. Example: "
-        required: MUST
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution
-    "publisher":
-        description: "Must be an URI. Example: "
-        required: MUST
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution
-    "publisher":
-        description: "Must be an URI. Example: "
-        required: MUST
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution
-    "publisher":
-        description: "Must be an URI. Example: "
-        required: MUST
-        range: uri
-        levels:
-            - summary
-            - version
-            - distribution
-    
-      dct:rights: "The data in ChEMBL is covered by the Creative Commons By Attribution. Under the -BY clause" ;
-      dcat:theme ncit:C48807 ; #chemical
-      dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ;
-      dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ;
-      rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ;
-      cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ;
-      dct:hasPart :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ;
+    - name: "rdf:type"
+      description: "Example: dctypes:Dataset"
+      range: uri
+      summaryLevel: MUST
+      versionLevel: MUST
+      rdfDistributionLevel: MUST
+      sourceDistributionLevel: MUST
+    - name: "dct:title"
+      description: "Example: ChEMBL"
+      range: string
+      summaryLevel: MUST
+      versionLevel: MUST
+      rdfDistributionLevel: MUST
+      sourceDistributionLevel: MUST
+    - name: "dct:alternative"
+      description: "Example: 'ChEMBLdb'@en"
+      range: string
+      summaryLevel: MUST
+      versionLevel: MUST
+      rdfDistributionLevel: MUST
+      sourceDistributionLevel: MUST
+    - name: "dct:description"
+      description: "Example: ChEMBL is a database of bioactive compounds"
+      range: string
+      summaryLevel: MUST
+      versionLevel: MUST
+      rdfDistributionLevel: MUST
+      sourceDistributionLevel: MUST
+    - name: "dct:publisher"
+      description: "Must be an URI. Use https://orcid.org/ for researchers. Example:  https://orcid.org/0000-0003-4727-9435"
+      range: uri
+      summaryLevel: MUST
+      versionLevel: MUST
+      rdfDistributionLevel: MUST
+      sourceDistributionLevel: MUST
+    - name: "foaf:page"
+      description: "Must be an URI. Example: http://www.ebi.ac.uk/chembl/"
+      range: uri
+      summaryLevel: SHOULD
+      versionLevel: SHOULD
+      rdfDistributionLevel: SHOULD
+      sourceDistributionLevel: SHOULD
+    - name: "schemaorg:logo"
+      description: "Must be an URI. Example: http://www.ebi.ac.uk/rdf/sites/ebi.ac.uk.rdf/files/resize/images/rdf/chembl_service_logo-146x48.gif"
+      range: uri
+      summaryLevel: MUST
+      versionLevel: MUST
+      rdfDistributionLevel: MUST
+      sourceDistributionLevel: MUST
+    - name: "dct:license"
+      description: "Must be an URI. Example: http://creativecommons.org/licenses/by-sa/3.0/"
+      range: uri
+      summaryLevel: MAY
+      versionLevel: MUST
+      rdfDistributionLevel: MUST
+      sourceDistributionLevel: MUST
+    - name: "dct:rights"
+      description: "Example: The data in ChEMBL is covered by the Creative Commons By Attribution. Under the -BY clause"
+      range: string
+      summaryLevel: MAY
+      versionLevel: MAY
+      rdfDistributionLevel: MAY
+      sourceDistributionLevel: MAY
+
+#      dcat:theme ncit:C48807 ; #chemical
+#      dcat:keyword "assay"^^xsd:string, "chemical"^^xsd:string ;
+#      dct:references <http://dx.doi.org/10.1093/bioinformatics/btt765> ;
+#      rdfs:seeAlso <http://en.wikipedia.org/wiki/ChEMBL> ;
+#      cito:citesAsAuthority <http://nar.oxfordjournals.org/content/40/D1/D1100> ;
+#      dct:hasPart :chembl17_rdf_molecule_dataset, :chembl17_rdf_target_dataset ;
   #Identifiers
-      idot:preferredPrefix "chembl" ;
-      idot:alternatePrefix "chembldb" ;
+#      idot:preferredPrefix "chembl" ;
+#      idot:alternatePrefix "chembldb" ;
   #Provenance and Change
-      pav:hasCurrentVersion :chembl17 ;
-      dct:accrualPeriodicity freq:quarterly;
+#      pav:hasCurrentVersion :chembl17 ;
+#      dct:accrualPeriodicity freq:quarterly;
   #Availability/Distributions
-      dcat:accessURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb> ;
-      void:sparqlEndpoint <https://www.ebi.ac.uk/rdf/services/chembl/sparql>;
+#      dcat:accessURL <ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb> ;
+#      void:sparqlEndpoint <https://www.ebi.ac.uk/rdf/services/chembl/sparql>;
